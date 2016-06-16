@@ -4814,17 +4814,18 @@ function formatValue(value) {
 function metrics(obj, data) {
   var dimensions = data.dimensions;
   var metrics = data.metrics;
-  var contentGroupings = data.contentGroupings;
+  // var contentGroupings = data.contentGroupings;
+  var names = Object.keys(metrics).concat(Object.keys(dimensions));
 
   var ret = {};
 
-  each([metrics, dimensions, contentGroupings], function(group) {
-    each(group, function(prop, key) {
-      var value = dot(obj, prop) || obj[prop];
-      if (isBoolean(value)) value = value.toString();
-      if (value) ret[key] = value;
-    });
-  });
+  for (var i = 0; i < names.length; ++i) {
+    var name = names[i];
+    var key = metrics[name] || dimensions[name];
+    var value = dot(obj, name) || obj[name];
+    if (value == null) continue;
+    ret[key] = value;
+  }
 
   return ret;
 }
