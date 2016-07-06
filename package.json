@@ -6,7 +6,8 @@
   "license": "MIT",
   "main": "dist/integration.js",
   "scripts": {
-    "build": "rollup --config rollupfile.js"
+    "build": "rollup --config rollupfile.js",
+    "dist": "uglifyjs --screw-ie8 --stats --mangle --verbose --compress --output ./dist/integration.min.js ./dist/integration.js"
   },
   "engines": {
     "node": ">=0.12.0",
@@ -23,13 +24,13 @@
   "dependencies": {
     "@ndhoule/defaults": "2.0.1",
     "@ndhoule/each": "2.0.1",
-    "@segment/analytics.js-integration": "3.1.0",
     "global-queue": "1.0.1",
     "obj-case": "0.2.0"
   },
   "devDependencies": {
     "rollup": "0.31.2",
     "rollup-plugin-commonjs": "3.0.0",
-    "rollup-plugin-node-resolve": "1.7.0"
+    "rollup-plugin-node-resolve": "1.7.0",
+    "uglify-js": "2.7.0"
   }
 }

@@ -4,6 +4,9 @@ import nodeResolve from 'rollup-plugin-node-resolve';
 
 export default {
   entry: 'lib/index.js',
+  external: [
+    'analytics',
+  ],
   plugins: [
     nodeResolve({
       browser: true,
@@ -13,6 +16,6 @@ export default {
     }),
   ],
   targets: [
-    { dest: 'dist/integration.js', format: 'cjs' },
+    { dest: 'dist/integration.js', format: 'iife', moduleName: 'NOT_A_MODULE', globals: { analytics: 'analytics' } },
   ],
 };
